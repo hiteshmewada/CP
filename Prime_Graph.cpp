@@ -57,7 +57,10 @@ void solve()
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
     cin >> n;
-    cout << (sieve(n - 1) * n) / 2 << endl;
+    if (n % 2)
+        cout << (sieve(n - 1) * (n - 1)) / 2 + 1 << endl;
+    else
+        cout << (sieve(n - 1) * n) / 2 << endl;
 }
 int main()
 {

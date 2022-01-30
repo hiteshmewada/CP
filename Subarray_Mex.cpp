@@ -40,18 +40,28 @@ void solve()
 {
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
-    cin >> n >> a;
-    cout << m << " ";
-    rep(i, 2, a + 1)
+    cin >> n >> a >> b;
+    if (b > a)
+        cout << -1 << endl;
+    else
     {
-        c = n % i;
-        if (c == 0)
-            c = i;
-        if (c <= m)
-            m++;
-        cout << m << " ";
+        c = b - 1;
+        vector<ll> v;
+        while (1)
+        {
+            per(i, c, -1)
+            {
+                v.pb(i);
+                if (v.size() == n)
+                    break;
+            }
+            if (v.size() == n)
+                break;
+        }
+        for (auto x : v)
+            cout << x << " ";
+        cout << endl;
     }
-    cout << endl;
 }
 int main()
 {

@@ -40,18 +40,21 @@ void solve()
 {
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
-    cin >> n >> a;
-    cout << m << " ";
-    rep(i, 2, a + 1)
+    cin >> n;
+    ll ar[n], br[n];
+    rep(i, 0, n) cin >> ar[i];
+    rep(i, 0, n) cin >> br[i];
+    rep(i, 0, n)
     {
-        c = n % i;
-        if (c == 0)
-            c = i;
-        if (c <= m)
-            m++;
-        cout << m << " ";
+        if (ar[i] > br[i])
+            swap(ar[i], br[i]);
+        j = max(j, ar[i]);
     }
-    cout << endl;
+    rep(i, 0, n)
+    {
+        k = max(k, br[i]);
+    }
+    cout << k * j << endl;
 }
 int main()
 {

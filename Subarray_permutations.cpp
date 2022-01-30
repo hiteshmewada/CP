@@ -41,17 +41,23 @@ void solve()
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
     cin >> n >> a;
-    cout << m << " ";
-    rep(i, 2, a + 1)
+    vector < ll > v;
+    if (a == 1 and n > 1)
+        cout << -1 << endl;
+    else if (n == 1)
+        cout << 1 << endl;
+    else
     {
-        c = n % i;
-        if (c == 0)
-            c = i;
-        if (c <= m)
-            m++;
-        cout << m << " ";
+        b = n - a + 1;
+        rep(i, 1, b )
+        {
+            v.pb(i);
+        }
+        per(i, n, b-1) v.pb(i);
+        for (auto x : v)
+            cout << x << " ";
+        cout << endl;
     }
-    cout << endl;
 }
 int main()
 {

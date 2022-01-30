@@ -34,22 +34,29 @@ ll powermod(ll x, ll y, ll p)
     return res;
 }
 #define endl "\n"
-
+vector<ll> v;
+void pre()
+{
+    ll a = 1, b = 2;
+    for (ll i = 0; i < 1000000; i++)
+    {
+        v.pb(a ^ b);
+        a = b;
+        b++;
+    }
+}
 const ll mod = 1e9 + 7;
 void solve()
 {
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
-    cin >> n >> a;
-    cout << m << " ";
-    rep(i, 2, a + 1)
+    cin >> n;
+    for (auto x : v)
     {
-        c = n % i;
-        if (c == 0)
-            c = i;
-        if (c <= m)
-            m++;
-        cout << m << " ";
+        cout << x << " ";
+        i++;
+        if (i == n)
+            break;
     }
     cout << endl;
 }
@@ -60,6 +67,7 @@ int main()
     cout.tie(0);
     ll t = 1;
     cin >> t;
+    pre();
     while (t--)
     {
         solve();

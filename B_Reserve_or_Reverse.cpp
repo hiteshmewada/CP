@@ -40,18 +40,51 @@ void solve()
 {
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
-    cin >> n >> a;
-    cout << m << " ";
-    rep(i, 2, a + 1)
+    cin >> n >> s;
+    j = 0;
+    map<char, int> mp;
+    rep(i, 0, n)
     {
-        c = n % i;
-        if (c == 0)
-            c = i;
-        if (c <= m)
-            m++;
-        cout << m << " ";
+        mp[s[i]]++;
     }
-    cout << endl;
+    j = n - 1;
+    // cout<<mp['e']<<" ";
+    rep(i, 0, n)
+    {
+        mp[s[i]]--;
+        for (auto x : mp)
+        {
+            ll ii = 0;
+            if (x.ss == 0)
+                continue;
+            // cout << x.ff << " ";
+            if (s[i] <= x.ff)
+                break;
+            else
+            {
+                while (j >= 0 and j > i)
+                {
+
+                    if (s[j] == x.ff)
+                    {
+
+                        swap(s[j], s[i]);
+                        ii = 1;
+                        mp[s[i]]--;
+                        j--;
+                        break;
+                    }
+                    mp[s[j]]--;
+                    j--;
+                }
+                if (j <= i or ii)
+                    break;
+            }
+        }
+        if (j <= i)
+            break;
+    }
+    cout << s;
 }
 int main()
 {
@@ -59,7 +92,7 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll t = 1;
-    cin >> t;
+    // cin>>t;
     while (t--)
     {
         solve();

@@ -74,6 +74,7 @@ void solve()
             
         }
     }
+    
     cout << k << endl;
 }
 int main()

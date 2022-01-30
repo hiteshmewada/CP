@@ -40,18 +40,51 @@ void solve()
 {
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
-    cin >> n >> a;
-    cout << m << " ";
-    rep(i, 2, a + 1)
+    cin >> n >> a >> b;
+    ll ar[n];
+    rep(i, 0, n) cin >> ar[i];
+    sort(ar, ar + n);
+    m = ar[0];
+    if (a <= m)
     {
-        c = n % i;
-        if (c == 0)
-            c = i;
-        if (c <= m)
-            m++;
-        cout << m << " ";
+        k = a / b;
+        if (a % b)
+            k++;
+        cout << k << endl;
     }
-    cout << endl;
+    else
+    {
+        k += m / b;
+        if (m % b)
+            k++;
+        rep(i, 1, n)
+        {
+            if (ar[i] - ar[i - 1] > b)
+            {
+                ar[i - 1] += b;
+                if (a <= ar[i])
+                {
+                    k += (a - ar[i - 1]) / b;
+                    if ((a - ar[i - 1]) % b)
+                        k++;
+                    cout << k << endl;
+                    return;
+                }
+                else
+                {
+                    k += (ar[i] - ar[i - 1]) / b;
+                    if ((ar[i] - ar[i - 1]) % b)
+                        k++;
+                }
+            }
+        }
+        j = ar[n - 1];
+        j += b;
+        k += (a - j) / b;
+        if ((a - j) % b)
+            k++;
+        cout << k << endl;
+    }
 }
 int main()
 {
@@ -59,7 +92,7 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll t = 1;
-    cin >> t;
+    // cin>>t;
     while (t--)
     {
         solve();

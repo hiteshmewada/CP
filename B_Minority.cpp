@@ -40,32 +40,22 @@ void solve()
 {
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
-    cin >> n >> a >> s;
-    ll low = 1, high = n;
-    while (low <= high and high >= 0)
+    cin >> s;
+    rep(i, 0, s.size())
     {
-        ll mid = low + (high - low) / 2, ans = 0;
-        // cout<<mid<<" ."<<endl;
-        per(i, mid - 1, -1)
-        {
-            m = s[i] - '0';
-            m += ans;
-            // p = to_string(m);
-            // m = p[0] - '0';
-            m = m % 10;
-            m = 10 - m;
-            ans += (m % 10);
-        }
-        // cout << ans << endl;
-        if (ans > a)
-            high = mid - 1;
+        if (s[i] == '0')
+            j++;
         else
-        {
-            low = mid + 1;
-            k = max(k, mid);
-        }
+            k++;
     }
-    cout << low - 1 << endl;
+    if (s.size() == 1)
+    {
+        cout << 0 << endl;
+    }
+    else if (j == k)
+        cout << k - 1 << endl;
+    else
+        cout << min(j, k) << endl;
 }
 int main()
 {

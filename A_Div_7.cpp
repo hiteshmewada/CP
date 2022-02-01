@@ -40,32 +40,40 @@ void solve()
 {
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
-    cin >> n >> a >> s;
-    ll low = 1, high = n;
-    while (low <= high and high >= 0)
+    cin >> n;
+    if (n % 7 == 0)
+        cout << n << endl;
+    else
     {
-        ll mid = low + (high - low) / 2, ans = 0;
-        // cout<<mid<<" ."<<endl;
-        per(i, mid - 1, -1)
+        vector<ll> v;
+        i = n % 7;
+        a = 7 - i;
+        b = n;
+        c = n % 10;
+        if (a + c >= 10)
         {
-            m = s[i] - '0';
-            m += ans;
-            // p = to_string(m);
-            // m = p[0] - '0';
-            m = m % 10;
-            m = 10 - m;
-            ans += (m % 10);
+            cout << b - i << endl;
         }
-        // cout << ans << endl;
-        if (ans > a)
-            high = mid - 1;
         else
         {
-            low = mid + 1;
-            k = max(k, mid);
+            cout << b + a << endl;
         }
+        // while (n)
+        // {
+        //     // v.pb(n%10);
+        //     if ((n % 10) != 7)
+        //         k++;
+        //     n /= 10;
+        //     j++;
+        // }
+        // if (a + c < 10)
+        //     cout << b + a << endl;
+        // else
+        // {
+        //     rep(i, 0, j) cout << 7;
+        //     cout << endl;
+        // }
     }
-    cout << low - 1 << endl;
 }
 int main()
 {

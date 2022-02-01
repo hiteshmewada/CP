@@ -43,83 +43,22 @@ void solve()
     cin >> n;
     ll ar[n];
     rep(i, 0, n) cin >> ar[i];
-    if (n == 1)
-    {
-        cout << 0 << endl;
-        return;
-    }
-    j = 1;
-    rep(i, 1, n)
-    {
-        if (ar[i] == ar[0])
-        {
-            j++;
-        }
-        else
-        {
-            c++;
-            j *= 2;
-            i = j - 1;
-        }
-    }
-    k = c;
-    j = 1;
-    c = 0;
+    a = ar[n - 1];
+    b = 1;
     per(i, n - 2, -1)
     {
-        if (ar[i] == ar[n - 1])
+        if (ar[i] == a)
         {
-            j++;
+            b++;
+            continue;
         }
         else
         {
-            c++;
-            j *= 2;
-            i = n - j ;
+            k++;
+            b *= 2;
+            i = n - b;
         }
     }
-    k = min(k, c);
-    // cout<<1;
-    // if (ar[n - 1] == ar[n - 2])
-    //     j++;
-    // if (j > k)
-    // {
-    //     k = j;
-    //     a = ar[n-1];
-    // }
-    // b = 0;
-    // m = 0;
-    // rep(i, 0, n)
-    // {
-    //     if (a == ar[i] and b == 0)
-    //     {
-    //         if (ar[i + k - 1] == ar[i])
-    //         {
-    //             b = i + 1;
-    //             m = i + k;
-    //             break;
-    //         }
-    //     }
-    //     // else if (a == ar[i])
-    //     //     m = i + 1;
-    // }
-    // cout << b << " " << m << endl;
-    // c = 0;
-    // j = k;
-    // while (b > 1)
-    // {
-    //     if(b-2>=0 and ar[b-2]==a) {b--;continue;}
-    //     b -= j;
-    //     j *= 2;
-    //     c++;
-    // }
-    // while (m < n)
-    // {
-    //     if(m<n and ar[m]==a) {m++;continue;}
-    //     m += k;
-    //     k *= 2;
-    //     c++;
-    // }
     cout << k << endl;
 }
 int main()

@@ -40,32 +40,49 @@ void solve()
 {
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
-    cin >> n >> a >> s;
-    ll low = 1, high = n;
-    while (low <= high and high >= 0)
+    cin >> n >> a >> b >> m;
+    ll op1, op2, op3;
+    cin >> op1 >> op2 >> op3;
+    i = ceil(n / m);
+    j = ceil(b / a);
+    while (op1)
     {
-        ll mid = low + (high - low) / 2, ans = 0;
-        // cout<<mid<<" ."<<endl;
-        per(i, mid - 1, -1)
+        if (i >= j)
+            break;
+        ll ii = ceil((n + op3) / (m)), jj = ceil(b / (a + op2));
+        ll o1 = ii - i, o2 = j - jj;
+        if (o1 > o2)
         {
-            m = s[i] - '0';
-            m += ans;
-            // p = to_string(m);
-            // m = p[0] - '0';
-            m = m % 10;
-            m = 10 - m;
-            ans += (m % 10);
+            if (o1 < 0)
+            {
+                cout << "NO" << endl;
+                return;
+            }
+            else
+            {
+                n += op3;
+                i = ii;
+            }
         }
-        // cout << ans << endl;
-        if (ans > a)
-            high = mid - 1;
         else
         {
-            low = mid + 1;
-            k = max(k, mid);
+            if (o2 < 0)
+            {
+                cout << "NO" << endl;
+                return;
+            }
+            else
+            {
+                a += op2;
+                j = jj;
+            }
         }
+        op1--;
     }
-    cout << low - 1 << endl;
+    if (i >= j)
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
 }
 int main()
 {

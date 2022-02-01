@@ -40,32 +40,49 @@ void solve()
 {
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
-    cin >> n >> a >> s;
-    ll low = 1, high = n;
-    while (low <= high and high >= 0)
+    cin >> n >> s;
+    if (n == 2 and s[0] == s[1])
     {
-        ll mid = low + (high - low) / 2, ans = 0;
-        // cout<<mid<<" ."<<endl;
-        per(i, mid - 1, -1)
-        {
-            m = s[i] - '0';
-            m += ans;
-            // p = to_string(m);
-            // m = p[0] - '0';
-            m = m % 10;
-            m = 10 - m;
-            ans += (m % 10);
-        }
-        // cout << ans << endl;
-        if (ans > a)
-            high = mid - 1;
-        else
-        {
-            low = mid + 1;
-            k = max(k, mid);
-        }
+        cout << "NO" << endl;
     }
-    cout << low - 1 << endl;
+    else if (n == 1 or n == 2)
+    {
+        cout << "YES" << endl;
+    }
+    else
+    {
+        // rep(i, 0, n)
+        // {
+        //     if (i + 1 < n and s[i + 1] == s[i])
+        //     {
+        //         cout << "NO" << endl;
+        //         return;
+        //     }
+        // }
+        cout << "NO" << endl;
+    }
+    // rep(i, 0, n)
+    // {
+    //     m++;
+    //     b = 0;
+    //     p = "";
+    //     rep(j, i + 1, n)
+    //     {
+    //         p += s[j];
+    //         b++;
+    //         if (b == m)
+    //             break;
+    //     }
+    //     q = p;
+    //     reverse(all(q));
+    //     cout<<p<<endl;
+    //     if (p == q)
+    //     {
+    //         cout << "NO" << endl;
+    //         return;
+    //     }
+    // }
+    // cout << "YES" << endl;
 }
 int main()
 {

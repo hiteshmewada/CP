@@ -41,7 +41,7 @@ void solve()
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
     cin >> n >> a;
-    vector < ll > v;
+    vector<ll> v;
     if (a == 1 and n > 1)
         cout << -1 << endl;
     else if (n == 1)
@@ -49,11 +49,11 @@ void solve()
     else
     {
         b = n - a + 1;
-        rep(i, 1, b )
+        rep(i, 1, a)
         {
             v.pb(i);
         }
-        per(i, n, b-1) v.pb(i);
+        per(i, n, a - 1) v.pb(i);
         for (auto x : v)
             cout << x << " ";
         cout << endl;

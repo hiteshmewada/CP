@@ -40,32 +40,53 @@ void solve()
 {
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
-    cin >> n >> a >> s;
-    ll low = 1, high = n;
-    while (low <= high and high >= 0)
+    cin >> n;
+    n--;
+    a = log2(n);
+    // cout<<a<<endl;
+    vector<ll> v;
+    b = pow(2, a);
+    if (b == n)
     {
-        ll mid = low + (high - low) / 2, ans = 0;
-        // cout<<mid<<" ."<<endl;
-        per(i, mid - 1, -1)
+        // n--;
+        v.pb(n );
+        i = 0;
+        j = n - 1;
+        while (i <= j)
         {
-            m = s[i] - '0';
-            m += ans;
-            // p = to_string(m);
-            // m = p[0] - '0';
-            m = m % 10;
-            m = 10 - m;
-            ans += (m % 10);
-        }
-        // cout << ans << endl;
-        if (ans > a)
-            high = mid - 1;
-        else
-        {
-            low = mid + 1;
-            k = max(k, mid);
+            v.pb(i++);
+            if (i > j)
+                break;
+            v.pb(j--);
+            if (i > j)
+                break;
         }
     }
-    cout << low - 1 << endl;
+    else
+    {
+        // n--;
+        while (n != b)
+        {
+            v.pb(n );
+            n--;
+        }
+        // v.pb(n - 1);
+        i = 0;
+        j = n ;
+        while (i <= j)
+        {
+            
+            v.pb(j--);
+            if (i > j)
+                break;
+            v.pb(i++);
+            if (i > j)
+                break;
+        }
+    }
+    for (auto x : v)
+        cout << x << " ";
+    cout << endl;
 }
 int main()
 {

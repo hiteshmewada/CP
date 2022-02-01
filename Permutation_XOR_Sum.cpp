@@ -40,32 +40,52 @@ void solve()
 {
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
-    cin >> n >> a >> s;
-    ll low = 1, high = n;
-    while (low <= high and high >= 0)
+    cin >> n;
+    // if (n == 1)
+    // {
+    //     cout << 0 << endl;
+    //     return;
+    // }
+    // ll ar[n+1] = {0};
+    // per(i, n, 0)
+    // {
+    //     if (ar[i])
+    //         continue;
+    //     j = 0;
+    //     m = i;
+    //     b = 0;
+    //     c = 0;
+    //     while (m)
+    //     {
+    //         if (m % 2 == 0)
+    //             b += (1 << j);
+    //         c += (1 << j);
+    //         m /= 2;
+    //         j++;
+    //     }
+    //     if (b == 0 or b > n)
+    //         continue;
+    //     ar[b] = 1;
+    //     k += 2 * c;
+    // }
+    // rep(i, 0, 32)
+    // {
+    //     if (ar[i])
+    //         k += pow(2, i);
+    // }
+    k = n * (n + 1);
+    while (n)
     {
-        ll mid = low + (high - low) / 2, ans = 0;
-        // cout<<mid<<" ."<<endl;
-        per(i, mid - 1, -1)
-        {
-            m = s[i] - '0';
-            m += ans;
-            // p = to_string(m);
-            // m = p[0] - '0';
-            m = m % 10;
-            m = 10 - m;
-            ans += (m % 10);
-        }
-        // cout << ans << endl;
-        if (ans > a)
-            high = mid - 1;
+        if (n & 1)
+            k -= 2 * m;
         else
-        {
-            low = mid + 1;
-            k = max(k, mid);
-        }
+            break;
+        m*=2;
+        n /= 2;
     }
-    cout << low - 1 << endl;
+    // if (n % 2)
+    //     k -= 2;
+    cout << k << endl;
 }
 int main()
 {

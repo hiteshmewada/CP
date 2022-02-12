@@ -68,16 +68,16 @@ void solve()
             continue;
         }
         
-        // rep(j, 0, q.size() - 1) r += q[j];
-        // if (mp[r])
-        // {
-        //     cout << "YES" << endl;
-        //     return;
-        // }
+        rep(j, 0, q.size() - 1) r += q[j];
+        if (mp[r])
+        {
+            cout << "YES" << endl;
+            return;
+        }
        
-        // if (p.size() == 3)
+        if (p.size() == 2)
         // {
-        //     p.pop_back();
+            // p.pop_back();
         //     mp[p]++;
         // }
     }

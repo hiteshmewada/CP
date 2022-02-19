@@ -34,47 +34,56 @@ void solve()
 {
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
-    cin >> n;
-    vector<string> v;
-    set<string> st,st1;
-    rep(i, 0, n)
+    cin >> n >> a >> b;
+    while (n > 0)
     {
-        cin >> s;
-        st.insert(s);
-        v.pb(s);
-    }
-    rep(i, 0, n)
-    {
-        // st.insert(v[i]);
-        string p = v[i],q = p;
-        reverse(all(q));
-        if (p == q)
+        if (n > 100)
         {
-            cout << "YES" << endl;
-            return;
-        }
-        if (p.size() == 2)
-        {
-            if ((st.find(q) != st.end()) or (st1.find(q) != st1.end()) )
+            if (a < 25 * b)
             {
-                cout << "YES" << endl;
-                return;
+                k += a;
             }
-        }
-        else if (p.size() == 3)
-        {
-            string r=q;
-            q.pop_back();
-            if ((st.find(q) != st.end()) or (st.find(r) != st.end()))
+            else
             {
-                cout << "YES" << endl;
-                return;
+                k += 25 * b;
             }
-            p.pop_back();
-            st1.insert(p);
+            n -= 100;
         }
+        else
+        {
+            m = n / 4;
+            if (n % 4)
+                m++;
+            k += min(a, m * b);
+            n=0;
+        }
+        // c = (n / 100) * a;
+        // if (n % 100)
+        //     c++;
+        // j = (n / 4) * b;
+        // if (n % 4)
+        //     j++;
+        // if (c < j)
+        // {
+        //     n -= 100;
+        //     k += a;
+        // }
+        // else
+        // {
+        //     n -= 100;
+        //     if (n > 100)
+        //         i = 25;
+        //     else
+        //     {
+        //         i = n / 4;
+        //         if (n % 4)
+        //             i++;
+        //     }
+        //     n -= 100;
+        //     k += b * i;
+        // }
     }
-    cout << "NO" << endl;
+    cout << k << endl;
 }
 int main()
 {

@@ -30,51 +30,34 @@ const ll mod = 1e9 + 7;
 #define PI 3.1415926535897932384626
 #define endl "\n"
 
+// Always use 1ll when doing 2 to the power
 void solve()
 {
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
     cin >> n;
-    vector<string> v;
-    set<string> st,st1;
+    ll ar[n];
+    rep(i, 0, n) cin >> ar[i];
+    vl v(360, 0);
     rep(i, 0, n)
     {
-        cin >> s;
-        st.insert(s);
-        v.pb(s);
+        k += ar[i];
+        k %= 360;
+        v[k] = 1;
     }
-    rep(i, 0, n)
+    vl vec;
+    rep(i, 0, v.size())
     {
-        // st.insert(v[i]);
-        string p = v[i],q = p;
-        reverse(all(q));
-        if (p == q)
-        {
-            cout << "YES" << endl;
-            return;
-        }
-        if (p.size() == 2)
-        {
-            if ((st.find(q) != st.end()) or (st1.find(q) != st1.end()) )
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
-        else if (p.size() == 3)
-        {
-            string r=q;
-            q.pop_back();
-            if ((st.find(q) != st.end()) or (st.find(r) != st.end()))
-            {
-                cout << "YES" << endl;
-                return;
-            }
-            p.pop_back();
-            st1.insert(p);
-        }
+        if (v[i])
+            vec.pb(i);
     }
-    cout << "NO" << endl;
+    vec.pb(360);
+    j = vec[0];
+    rep(i, 1, vec.size())
+    {
+        j = max(j, abs(vec[i] - vec[i - 1]));
+    }
+    cout << j << endl;
 }
 int main()
 {
@@ -82,7 +65,7 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--)
     {
         solve();

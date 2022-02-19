@@ -35,46 +35,30 @@ void solve()
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
     cin >> n;
-    vector<string> v;
-    set<string> st,st1;
-    rep(i, 0, n)
+    ll ar[n];
+    rep(i, 0, n) cin >> ar[i];
+    ll dp[n + 1][n + 1];
+    rep(i, 0, n + 1) rep(j, 0, n + 1) dp[i][j] = 0;
+    ll ans = 0;
+    rep(i, 0, n + 1)
     {
-        cin >> s;
-        st.insert(s);
-        v.pb(s);
-    }
-    rep(i, 0, n)
-    {
-        // st.insert(v[i]);
-        string p = v[i],q = p;
-        reverse(all(q));
-        if (p == q)
+        rep(j, 0, n + 1)
         {
-            cout << "YES" << endl;
-            return;
-        }
-        if (p.size() == 2)
-        {
-            if ((st.find(q) != st.end()) or (st1.find(q) != st1.end()) )
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
-        else if (p.size() == 3)
-        {
-            string r=q;
-            q.pop_back();
-            if ((st.find(q) != st.end()) or (st.find(r) != st.end()))
-            {
-                cout << "YES" << endl;
-                return;
-            }
-            p.pop_back();
-            st1.insert(p);
+            ans = max(ans, dp[i][j]);
+            k = max(i, j) + 1;
+            if (i == j or k > n)
+                continue;
+            if (i == 0)
+                dp[k][j] = max(dp[k][j], dp[i][j]);
+            else
+                dp[k][j] = max(dp[k][j], dp[i][j] + abs(ar[k - 1] - ar[i - 1]));
+            if (j == 0)
+                dp[i][k] = max(dp[i][k], dp[i][j]);
+            else
+                dp[i][k] = max(dp[i][k], dp[i][j] + abs(ar[k - 1] - ar[j - 1]));
         }
     }
-    cout << "NO" << endl;
+    cout << ans << endl;
 }
 int main()
 {

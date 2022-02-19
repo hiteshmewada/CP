@@ -35,46 +35,66 @@ void solve()
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
     cin >> n;
-    vector<string> v;
-    set<string> st,st1;
+    ll ar[n];
+    // vl ar[n];
+    vl v;
     rep(i, 0, n)
     {
-        cin >> s;
-        st.insert(s);
-        v.pb(s);
+        cin >> ar[i];
+        // v.pb(ar[i]);
+    }
+    j = 1;
+    rep(i, 0, n - 1)
+    {
+        if (ar[i] == j)
+        {
+            j++;
+            continue;
+        }
+        else
+        {
+            k = i;
+            break;
+        }
+        //     v.pb(ar[i]);
+        // else if (ar[i] == j)
+        // {
+        //     j++;
+        //     cout << ar[i] << " ";
+        // }
+        // else
+        // {
+        //     v.pb(ar[i]);
+        //     k=i;
+        //     break;
+        // }
+        j++;
+    }
+    if(j==n){
+        rep(i,0,n) cout<<ar[i]<<" ";
+        cout<<endl;
+        return;
     }
     rep(i, 0, n)
     {
-        // st.insert(v[i]);
-        string p = v[i],q = p;
-        reverse(all(q));
-        if (p == q)
-        {
-            cout << "YES" << endl;
-            return;
-        }
-        if (p.size() == 2)
-        {
-            if ((st.find(q) != st.end()) or (st1.find(q) != st1.end()) )
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
-        else if (p.size() == 3)
-        {
-            string r=q;
-            q.pop_back();
-            if ((st.find(q) != st.end()) or (st.find(r) != st.end()))
-            {
-                cout << "YES" << endl;
-                return;
-            }
-            p.pop_back();
-            st1.insert(p);
-        }
+        if (ar[i] == j)
+            c = i;
     }
-    cout << "NO" << endl;
+    rep(i, k, c + 1) v.pb(ar[i]);
+    reverse(all(v));
+    rep(i, 0, k) cout << ar[i] << " ";
+    for (auto x : v)
+        cout << x << " ";
+    rep(i, c + 1, n) cout << ar[i] << " ";
+    // reverse(all(v));
+    // for (auto x : v)
+    //     cout << x << " ";
+    // rep(i, k+1 , n) cout << ar[i] << " ";
+    // rep(j,0,i+1) v.pb(ar[j]);
+    // reverse(all(v));
+    // rep(j,0,i+1) cout<<v[j]<<" ";
+    // rep(j,i+1,n) cout<<ar[j]<<" ";
+    cout << endl;
 }
 int main()
 {

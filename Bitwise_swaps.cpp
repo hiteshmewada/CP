@@ -29,52 +29,73 @@ ll powermod(ll x, ll y, ll p);
 const ll mod = 1e9 + 7;
 #define PI 3.1415926535897932384626
 #define endl "\n"
+ll dsu[31];
+ll root(ll i)
+{
+    if (dsu[i] == i)
+        return i;
+    return dsu[i] = root(dsu[i]);
+}
+
+void Union(ll i, ll j)
+{
+    ll rota = root(i), rotb = root(j);
+    if (rota == rotb)
+        return;
+    dsu[rota] = rotb;
+}
 
 void solve()
 {
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
     cin >> n;
-    vector<string> v;
-    set<string> st,st1;
+    vl v(n), vec;
     rep(i, 0, n)
     {
-        cin >> s;
-        st.insert(s);
-        v.pb(s);
+        cin >> v[i];
+        vec.pb(v[i]);
     }
+    rep(i, 1, 31) dsu[i] = i;
+    sort(all(vec));
+    // DSU dsu(32);
+    for (auto x : v)
+    {
+        rep(i, 0, 31)
+        {
+            rep(j, i + 1, 31)
+            {
+                if ((x & (1ll << i)) and (x & (1ll << j)))
+                    Union(i, j);
+            }
+        }
+    }
+    k = 1;
     rep(i, 0, n)
     {
-        // st.insert(v[i]);
-        string p = v[i],q = p;
-        reverse(all(q));
-        if (p == q)
+        ll can = 0;
+        if (!v[i] and !vec[i])
+            continue;
+        rep(j, 0, 31)
         {
-            cout << "YES" << endl;
-            return;
-        }
-        if (p.size() == 2)
-        {
-            if ((st.find(q) != st.end()) or (st1.find(q) != st1.end()) )
+            rep(c, 0, 31)
             {
-                cout << "YES" << endl;
-                return;
+                if ((v[i] & (1ll << j)) and (vec[i] & (1ll << c)) and (root(j) == root(c)))
+                {
+                    can = 1;
+                }
             }
         }
-        else if (p.size() == 3)
+        if (can == 0)
         {
-            string r=q;
-            q.pop_back();
-            if ((st.find(q) != st.end()) or (st.find(r) != st.end()))
-            {
-                cout << "YES" << endl;
-                return;
-            }
-            p.pop_back();
-            st1.insert(p);
+            k = 0;
+            break;
         }
     }
-    cout << "NO" << endl;
+    if (k)
+        cout << "Yes" << endl;
+    else
+        cout << "No" << endl;
 }
 int main()
 {

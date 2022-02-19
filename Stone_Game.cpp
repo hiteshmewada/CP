@@ -34,47 +34,33 @@ void solve()
 {
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
-    cin >> n;
-    vector<string> v;
-    set<string> st,st1;
-    rep(i, 0, n)
+    cin >> n >> s >> p;
+    sort(all(s));
+    sort(all(p));
+    reverse(all(p));
+    vector<char> v(2 * s.size());
+    ll start = 0, end = 2 * s.size() - 1, starta = 0, startb = 0, enda = s.size() - 1,
+       endb = p.size() - 1;
+    rep(i, 0, 2*n)
     {
-        cin >> s;
-        st.insert(s);
-        v.pb(s);
-    }
-    rep(i, 0, n)
-    {
-        // st.insert(v[i]);
-        string p = v[i],q = p;
-        reverse(all(q));
-        if (p == q)
+        if (i % 2 == 0) // Alice
         {
-            cout << "YES" << endl;
-            return;
+            if (startb <= endb and s[starta] >= p[startb])
+                v[end--] = s[enda--];
+            else
+                v[start++] = s[starta++];
         }
-        if (p.size() == 2)
+        else
         {
-            if ((st.find(q) != st.end()) or (st1.find(q) != st1.end()) )
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
-        else if (p.size() == 3)
-        {
-            string r=q;
-            q.pop_back();
-            if ((st.find(q) != st.end()) or (st.find(r) != st.end()))
-            {
-                cout << "YES" << endl;
-                return;
-            }
-            p.pop_back();
-            st1.insert(p);
+            if (starta <= enda and s[starta] >= p[startb])
+                v[end--] = p[endb--];
+            else
+                v[start++] = p[startb++];
         }
     }
-    cout << "NO" << endl;
+    for (auto x : v)
+        cout << x;
+    cout << endl;
 }
 int main()
 {

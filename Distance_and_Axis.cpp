@@ -34,47 +34,18 @@ void solve()
 {
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
-    cin >> n;
-    vector<string> v;
-    set<string> st,st1;
-    rep(i, 0, n)
+    cin >> n >> a;
+    if (a == 0)
     {
-        cin >> s;
-        st.insert(s);
-        v.pb(s);
+        if (n % 2)
+            cout << 1 << endl;
+        else
+            cout << 0 << endl;
     }
-    rep(i, 0, n)
+    else
     {
-        // st.insert(v[i]);
-        string p = v[i],q = p;
-        reverse(all(q));
-        if (p == q)
-        {
-            cout << "YES" << endl;
-            return;
-        }
-        if (p.size() == 2)
-        {
-            if ((st.find(q) != st.end()) or (st1.find(q) != st1.end()) )
-            {
-                cout << "YES" << endl;
-                return;
-            }
-        }
-        else if (p.size() == 3)
-        {
-            string r=q;
-            q.pop_back();
-            if ((st.find(q) != st.end()) or (st.find(r) != st.end()))
-            {
-                cout << "YES" << endl;
-                return;
-            }
-            p.pop_back();
-            st1.insert(p);
-        }
+        cout << min({n, abs(a - n), abs(n - a)}) << endl;
     }
-    cout << "NO" << endl;
 }
 int main()
 {

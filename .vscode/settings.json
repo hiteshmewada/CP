@@ -17,7 +17,10 @@
         "valarray": "cpp",
         "cstdlib": "cpp",
         "ostream": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "iomanip": "cpp",
+        "chrono": "cpp",
+        "complex": "cpp"
     },
     "cSpell.words": [
         "fibo",

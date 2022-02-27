@@ -34,42 +34,12 @@ void solve()
 {
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
     string s, p, q;
-    cin >> n;
-    vl ar(n);
-    rep(i, 0, n) cin >> ar[i];
-    vl ans;
-    stack<pl> st;
-    rep(i, 0, n)
+    vl v;
+    while (cin >> n)
     {
-        if (st.empty())
-        {
-            st.push({ar[i], 1});
-            ans.pb(1);
-            continue;
-        }
-        pl pp = st.top();
-        if (ar[i] == pp.ff)
-        {
-            pp.ss++;
-            if (ar[i] == pp.ss)
-            {
-                pp.ss--;
-                while (pp.ss > 0)
-                {
-                    pp.ss--;
-                    st.pop();
-                }
-                ans.pb(st.size());
-                continue;
-            }
-            else st.push({ar[i], pp.ss});
-        }
-        else
-            st.push({ar[i], 1});
-        ans.pb(st.size());
+        v.pb(n);
     }
-    for (auto x : ans)
-        cout << x << endl;
+    cout << v[v[v[0]]] << endl;
 }
 int main()
 {
@@ -77,7 +47,7 @@ int main()
     cin.tie(0);
     cout.tie(0);
     ll t = 1;
-    // cin >> t;
+    // cin>>t;
     while (t--)
     {
         solve();

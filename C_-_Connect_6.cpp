@@ -2,10 +2,6 @@
 #include <bits/stdc++.h>
 #include <algorithm>
 #include <vector>
-#include <cstring>
-#include <cstdlib>
-#include <cmath>
-#include <cstdlib>
 #include <sstream>
 #include <string.h>
 using namespace std;
@@ -13,23 +9,84 @@ using namespace std;
 #define all(v) v.begin(), v.end()
 #define rep(i, n, v) for (i = n; i < v; i++)
 #define per(i, n, v) for (i = n; i > v; i--)
-#define deb(x) cout << #x << "=" << x << endl
-#define deb2(x, y) cout << #x << "=" << x << ", " << #y << "=" << y << endl
+#define ll long long
+#define ld long double
 #define ff first
 #define ss second
 #define mp make_pair
-#define ll long long
-#define ld long double
 typedef pair<ll, ll> pl;
 typedef vector<ll> vl;
 typedef vector<pl> vpl;
 typedef vector<vl> vvl;
-ll powermod(ll x, ll y, ll p);
 const ll mod = 1e9 + 7;
 #define PI 3.1415926535897932384626
 #define endl "\n"
 
-// Always use 1ll when doing 2 to the power
+#define set_bits __builtin_popcountll
+#define sp(x, y) fixed << setprecision(y) << x
+#define sz(x) ((ll)(x).size())
+#ifndef ONLINE_JUDGE
+#define deb2(x, y)             \
+    cerr << #x << "=";         \
+    _print(x);                 \
+    cerr << ", " << #y << "="; \
+    _print(y);                 \
+    cerr << endl;
+#define deb(x)         \
+    cerr << #x << "="; \
+    _print(x);         \
+    cerr << endl;
+#endif
+void _print(int a)
+{
+    cerr << a;
+}
+void _print(ll a) { cerr << a; }
+void _print(char a) { cerr << a; }
+void _print(string a) { cerr << a; }
+void _print(bool a) { cerr << a; }
+template <class T>
+void _print(vector<T> a)
+{
+    cerr << "[";
+    for (T x : a)
+    {
+        _print(x);
+        cerr << ",";
+    }
+    cerr << "]";
+}
+template <class T, class V>
+void _print(pair<T, V> a)
+{
+    cerr << "{";
+    _print(a.ff);
+    cerr << ", ";
+    _print(a.ss);
+    cerr << "}";
+}
+template <class T, class V>
+void _print(map<T, V> a)
+{
+    cerr << "{";
+    for (auto x : a)
+    {
+        _print(x);
+        cerr << " ";
+    }
+    cerr << "}";
+}
+template <class T>
+void _print(set<T> a)
+{
+    cerr << "[";
+    for (T x : a)
+    {
+        _print(x);
+        cerr << ",";
+    }
+    cerr << "]";
+}
 void solve()
 {
     ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
@@ -43,147 +100,51 @@ void solve()
     }
     rep(i, 0, n)
     {
-        s = v[i];
-        rep(j, 0, s.size())
+        p = v[i];
+        rep(j, 0, n)
         {
-            if (s[j] == '#')
+            if (i + 5 < n)
             {
                 b = 0;
-                c = 0;
-                ll temp = j;
-                while (temp < s.size())
+                rep(c, 0, 6)
                 {
-                    if (s[temp] == '#')
+                    if (v[i + c][j] == '#')
                         b++;
-                    else
-                        c++;
-                    temp++;
                 }
-                // j=temp;
-                if (b >= 4 and (6 - b) <= c)
+                if (b >= 4)
                     k = 1;
             }
-            if (s[j] == '#')
+            if (j + 5 < n)
             {
                 b = 0;
-                c = 0;
-                ll temp = i;
-                while (temp < n)
+                rep(c, 0, 6)
                 {
-                    if (v[temp][j] == '#')
+                    if (v[i][j + c] == '#')
                         b++;
-                    else
-                        c++;
-                    temp++;
                 }
-                if (b >= 4 and (6 - b) <= c)
+                if (b >= 4)
                     k = 1;
             }
-            if (s[j] == '#')
+            if (i + 5 < n and j + 5 < n)
             {
                 b = 0;
-                c = 0;
-                ll temp = i;
-                while (temp >= 0)
+                rep(c, 0, 6)
                 {
-                    if (v[temp][j] == '#')
+                    if (v[i + c][j + c] == '#')
                         b++;
-                    else
-                        c++;
-                    temp--;
                 }
-                if (b >= 4 and (6 - b) <= c)
+                if (b >= 4)
                     k = 1;
             }
-            if (s[j] == '#')
+            if (i - 5 >= 0 and j + 5 < n)
             {
                 b = 0;
-                c = 0;
-                ll temp = j;
-                while (temp >= 0)
+                rep(c, 0, 6)
                 {
-                    if (s[temp] == '#')
+                    if (v[i - c][j + c] == '#')
                         b++;
-                    else
-                        c++;
-                    temp--;
                 }
-                // j=temp;
-                if (b >= 4 and (6 - b) <= c)
-                    k = 1;
-            }
-            if (s[j] == '#')
-            {
-                b = 0;
-                c = 0;
-                ll temp = i, idx = j;
-                while (temp < n and idx < s.size())
-                {
-                    if (v[temp][idx] == '#')
-                        b++;
-                    else
-                        c++;
-                    temp++;
-                    idx++;
-                }
-                if (b >= 4 and (6 - b) <= c)
-                    k = 1;
-            }
-            if (s[j] == '#')
-            {
-                b = 0;
-                c = 0;
-                ll temp = i, idx = j;
-                while (temp >= 0 and idx >= 0)
-                {
-                    if (v[temp][idx] == '#')
-                        b++;
-                    else
-                        c++;
-                    temp--;
-                    idx--;
-                }
-                deb2(i, j);
-                deb2(b, c);
-                if (b >= 4 and (6 - b) <= c)
-                    k = 1;
-            }
-            if (s[j] == '#')
-            {
-                b = 0;
-                c = 0;
-                ll temp = i, idx = j;
-                while (temp < n and idx >= 0)
-                {
-                    if (v[temp][idx] == '#')
-                        b++;
-                    else
-                        c++;
-                    temp++;
-                    idx--;
-                }
-                deb2(i, j);
-                deb2(b, c);
-                if (b >= 4 and (6 - b) <= c)
-                    k = 1;
-            }
-            if (s[j] == '#')
-            {
-                b = 0;
-                c = 0;
-                ll temp = i, idx = j;
-                while (temp >= 0 and idx < s.size())
-                {
-                    if (v[temp][idx] == '#')
-                        b++;
-                    else
-                        c++;
-                    temp--;
-                    idx++;
-                }
-                deb2(i, j);
-                deb2(b, c);
-                if (b >= 4 and (6 - b) <= c)
+                if (b >= 4)
                     k = 1;
             }
         }
@@ -195,6 +156,9 @@ void solve()
 }
 int main()
 {
+#ifndef ONLINE_JUDGE
+// freopen("Error.txt","w",stderr);
+#endif
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
@@ -205,19 +169,4 @@ int main()
         solve();
     }
     return 0;
-}
-ll powermod(ll x, ll y, ll p)
-{
-    ll res = 1;
-    x = x % p;
-    if (x == 0)
-        return 0;
-    while (y > 0)
-    {
-        if (y & 1)
-            res = (res * x) % p;
-        y = (y >> 1);
-        x = (x * x) % p;
-    }
-    return res;
 }

@@ -1,0 +1,212 @@
+#pragma GCC optimize("trapv")
+#include <bits/stdc++.h>
+#include <algorithm>
+#include <vector>
+#include <sstream>
+#include <string.h>
+using namespace std;
+#define pb push_back
+#define all(v) v.begin(), v.end()
+#define rep(i, n, v) for (i = n; i < v; i++)
+#define per(i, n, v) for (i = n; i > v; i--)
+#define ll long long
+#define ld long double
+#define ff first
+#define ss second
+#define mp make_pair
+typedef pair<ll, ll> pl;
+typedef vector<ll> vl;
+typedef vector<pl> vpl;
+typedef vector<vl> vvl;
+const ll mod = 1e9 + 7;
+#define PI 3.1415926535897932384626
+#define endl "\n"
+
+#define set_bits __builtin_popcountll
+#define sp(x, y) fixed << setprecision(y) << x
+#define sz(x) ((ll)(x).size())
+#ifndef ONLINE_JUDGE
+#define deb2(x, y)             \
+    ;                          \
+    cerr << #x << "=";         \
+    _print(x);                 \
+    cerr << ", " << #y << "="; \
+    _print(y);                 \
+    cerr << endl;
+#else
+#define deb2(x, y) ;
+#endif
+#ifndef ONLINE_JUDGE
+#define deb(x)         \
+    cerr << #x << "="; \
+    _print(x);         \
+    cerr << endl;
+#else
+#define deb(x) ;
+#endif
+void _print(int a)
+{
+    cerr << a;
+}
+void _print(ll a) { cerr << a; }
+void _print(char a) { cerr << a; }
+void _print(string a) { cerr << a; }
+void _print(bool a) { cerr << a; }
+template <class T>
+void _print(vector<T> a)
+{
+    cerr << "[";
+    for (T x : a)
+    {
+        _print(x);
+        cerr << ",";
+    }
+    cerr << "]";
+}
+template <class T, class V>
+void _print(pair<T, V> a)
+{
+    cerr << "{";
+    _print(a.ff);
+    cerr << ", ";
+    _print(a.ss);
+    cerr << "}";
+}
+template <class T, class V>
+void _print(map<T, V> a)
+{
+    cerr << "{";
+    for (auto x : a)
+    {
+        _print(x);
+        cerr << " ";
+    }
+    cerr << "}";
+}
+template <class T>
+void _print(set<T> a)
+{
+    cerr << "[";
+    for (T x : a)
+    {
+        _print(x);
+        cerr << ",";
+    }
+    cerr << "]";
+}
+bool palin(string s)
+{
+    int n = s.size(), i = 0;
+    int j = n - 1;
+    while (i < j)
+    {
+        if (s[i] == s[j]){
+            i++,j--;
+        }      
+        else
+            return false;
+    }
+    return true;
+}
+void solve()
+{
+    ll n, a = 0, b = 0, m = 1, c = 0, k = 0, i = 0, j = 0, l = 1e9 + 5;
+    string s, p, q;
+    cin >> n >> s;
+    if(n<5){
+        cout<<"POSSIBLE"<<endl;return;
+    }
+    queue<string> q1, q2;
+    if (s[0] == '?')
+    {
+        q1.push("0");
+        q1.push("1");
+    }
+    else if (s[0] == '0')
+        q1.push("0");
+    else
+        q1.push("1");
+    rep(i, 1, n)
+    {
+        while (!q1.empty())
+        {
+            p = q1.front();
+            q1.pop();
+            c = p.size() + 1;
+            if (s[i] == '?')
+            {
+                q = p + "0";
+                if (c < 5)
+                {
+                    q2.push(q);
+                }
+                else if (c == 5 and !palin(q))
+                    q2.push(q);
+                else
+                {
+                    if (!palin(q) and !palin(q.substr(1, c - 1)))
+                        q2.push(q.substr(1, c - 1));
+                }
+                q = p + "1";
+                if (c < 5)
+                {
+                    q2.push(q);
+                }
+                else if (c == 5 and !palin(q))
+                    q2.push(q);
+                else
+                {
+                    if (!palin(q) and !palin(q.substr(1, c - 1)))
+                        q2.push(q.substr(1, c - 1));
+                }
+            }
+            else
+            {
+                q = p + s[i];
+                if (c < 5)
+                {
+                    q2.push(q);
+                }
+                else if (c == 5 and !palin(q))
+                    q2.push(q);
+                else
+                {
+                    if (!palin(q) and !palin(q.substr(1, c - 1)))
+                        q2.push(q.substr(1, c - 1));
+                }
+            }
+        }
+        while (!q2.empty())
+        {
+            q1.push(q2.front());
+                q2.pop();
+        }
+        if (q1.empty())
+        {
+            k = 1;
+            break;
+        }
+    }
+    if (k)
+        cout << "IMPOSSIBLE" << endl;
+    else
+        cout << "POSSIBLE" << endl;
+}
+int main()
+{
+#ifndef ONLINE_JUDGE
+    // freopen("Error.txt", "w", stderr);
+#endif
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    ll t = 1;
+    cin >> t;
+    for (ll i = 1; i <= t; i++)
+    {
+        cout << "Case #" << i << ": ";
+        solve();
+    }
+    // cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << endl;
+    return 0;
+}

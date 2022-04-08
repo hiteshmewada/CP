@@ -50,6 +50,7 @@ void solve()
         adj[m].pb(b);
     }
     vvl ans(n);
+    
     function<void(ll, ll)> dfs = [&](ll cur, ll par)
     {
         for (auto x : adj[cur])

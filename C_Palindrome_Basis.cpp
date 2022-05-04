@@ -44,19 +44,33 @@ template<class T> void _print(vector<T>a){cerr<<"[";for(T x:a){_print(x);cerr<<"
 template<class T,class V> void _print(pair<T,V>a){cerr<<"{";_print(a.ff);cerr<<", ";_print(a.ss);cerr<<"}";}
 template<class T,class V> void _print(map<T,V>a){cerr<<"{";for(auto x:a){_print(x);cerr<<" ";}cerr<<"}";}
 template<class T> void _print(set<T>a){cerr<<"[";for(T x:a){_print(x);cerr<<",";}cerr<<"]";}
+bool palin(ll n){
+    string s=to_string(n),p;
+    p=s;
+    reverse(all(s));
+    return s==p;
+}
+const ll N=40004,M=602;
+ll dp[N][M];
 void solve()
 {
-    ll  n, a=0,b=0,m=1, c=0,k=0, i=0, j=0, l=1e9+5;
+    ll  n, a=0,b=0,m=1, c=0,k=0, i=0, j=0, l=1e9+7;
     string s,p, q;
-    cin>>n>>a;
-    vl v(n);
-    rep(i,0,n) cin>>v[i];
-    sort(all(v));
-    rep(i,0,n){
-        b+=v[i];
-        k+=a/b;
+    vl v;
+    v.pb(0);
+    for(i=1;i<=2*N;i++){
+        if(palin(i)) v.pb(i);
     }
-    cout<<k<<endl;
+    
+    rep(i,1,M) dp[0][i]=1;
+    rep(i,1,N){
+        dp[i][0]=0;
+        rep(j,1,M){
+            if(v[j]<=i)
+                dp[i][j]=(dp[i][j-1]+dp[i-v[j]][j])%l;
+            else dp[i][j]=dp[i][j-1];
+        }
+    }
 }
 int main()
 {
@@ -67,9 +81,12 @@ int main()
     cin. tie(0);cout. tie(0);
     ll t=1;
     cin>>t;
+        solve();
     while(t--)
     {
-        solve();
+        ll ii;
+        cin>>ii;
+        cout<<dp[ii][M-1]<<endl;
     }
 //cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << endl; 
     return 0;

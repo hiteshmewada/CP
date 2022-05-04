@@ -48,20 +48,32 @@ void solve()
 {
     ll  n, a=0,b=0,m=1, c=0,k=0, i=0, j=0, l=1e9+5;
     string s,p, q;
-    cin>>n>>a;
-    vl v(n);
-    rep(i,0,n) cin>>v[i];
-    sort(all(v));
+    cin>>s;
+    n=s.size();
     rep(i,0,n){
-        b+=v[i];
-        k+=a/b;
+        if(i==0) j=s[i]-'a'+1;
+        if(i==n-1) b=s[i]-'a'+1;
+        k+=s[i]-'a'+1;
     }
-    cout<<k<<endl;
+    deb(k)
+    if(n==1){
+        cout<<"Bob "<<k<<endl;return;
+    }
+    if(n%2){
+        ll mx=max(k-j,k-b);
+        if(mx==k-j) c=j;
+        else c=b;
+        cout<<"Alice "<<abs(mx-c);
+    }
+    else{
+        cout<<"Alice "<<k;
+    }
+    cout<<endl;
 }
 int main()
 {
 #ifndef ONLINE_JUDGE
-// freopen("Error.txt","w",stderr);
+freopen("Error.txt","w",stderr);
 #endif
     ios_base::sync_with_stdio(false);
     cin. tie(0);cout. tie(0);

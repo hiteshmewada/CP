@@ -10,7 +10,7 @@ using namespace std;
 #define  rep(i,n,v) for(i=n;i<v;i++)
 #define per(i,n,v) for(i=n;i>v;i--)
 #define ll  long long
-#define ld  long double
+#define ld  long doublre
 #define ff first 
 #define ss second 
 #define mpp make_pair
@@ -51,17 +51,22 @@ void solve()
     cin>>n>>a;
     vl v(n);
     rep(i,0,n) cin>>v[i];
-    vl vec;
-    rep(i,0,a) vec.pb(v[i]);
-    sort(all(vec));
-    deb(vec)
-    b=vec[0];
+    vl vec(n-a,0);
+    j=0;
     rep(i,a,n){
-        if(v[i]>b){
-            cout<<i<<endl;return;
-        }
+        if(i==a) vec[j]=v[i];
+        else vec[j]=max(v[i],vec[j-1]);
+        j++;
     }
-    cout<<-1<<endl;
+    rep(i,0,n){
+        b=upper_bound(all(vec),v[i])-vec.begin();
+        if(b==vec.size()) k=1;
+        if(v[b]<=v[i]) k=1;
+        else l=min(l,b+addddd-i+1);
+    }
+    if(k) cout<<-1<<endl;
+    else cout<<l<<endl;
+
 }
 int main()
 {

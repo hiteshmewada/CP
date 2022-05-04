@@ -44,19 +44,23 @@ template<class T> void _print(vector<T>a){cerr<<"[";for(T x:a){_print(x);cerr<<"
 template<class T,class V> void _print(pair<T,V>a){cerr<<"{";_print(a.ff);cerr<<", ";_print(a.ss);cerr<<"}";}
 template<class T,class V> void _print(map<T,V>a){cerr<<"{";for(auto x:a){_print(x);cerr<<" ";}cerr<<"}";}
 template<class T> void _print(set<T>a){cerr<<"[";for(T x:a){_print(x);cerr<<",";}cerr<<"]";}
+vector<string>v;
 void solve()
 {
     ll  n, a=0,b=0,m=1, c=0,k=0, i=0, j=0, l=1e9+5;
     string s,p, q;
-    cin>>n>>a;
-    vl v(n);
-    rep(i,0,n) cin>>v[i];
-    sort(all(v));
-    rep(i,0,n){
-        b+=v[i];
-        k+=a/b;
+    
+    for(char c='a';c<='z';c++){
+        string s;
+        s+=c;
+        for(char d='a';d<='z';d++){
+            string p;
+            if(d==c) continue;
+            p+=s;
+            p+=d;
+            v.pb(p);
+        }
     }
-    cout<<k<<endl;
 }
 int main()
 {
@@ -67,9 +71,17 @@ int main()
     cin. tie(0);cout. tie(0);
     ll t=1;
     cin>>t;
+        solve();
     while(t--)
     {
-        solve();
+        string s;
+        cin>>s;
+        for(ll j=0;j<v.size();j++){
+            if(s==v[j]){
+                cout<<j+1<<endl;
+            }
+        }
+        // cout<<v.size()<<endl;
     }
 //cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << endl; 
     return 0;

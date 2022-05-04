@@ -48,15 +48,29 @@ void solve()
 {
     ll  n, a=0,b=0,m=1, c=0,k=0, i=0, j=0, l=1e9+5;
     string s,p, q;
-    cin>>n>>a;
-    vl v(n);
-    rep(i,0,n) cin>>v[i];
-    sort(all(v));
-    rep(i,0,n){
-        b+=v[i];
-        k+=a/b;
+    cin>>s>>p;
+    rep(i,0,p.size()){
+        if(p[i]=='a') a++;
     }
-    cout<<k<<endl;
+    if(a){
+        if(p.size()==1) {cout<<1<<endl;return;}
+        else k=1;
+    }
+    n=s.size();
+    if(n==1) b=2;
+    else 
+    b=4;
+    j=4;
+    ll temp=0;
+    rep(i,3,n+1) {
+        j+=b;
+        temp=1;
+        b=j;
+    }
+    if(temp) b=j;
+    if(k) cout<<-1;
+    else cout<<b;
+    cout<<endl;
 }
 int main()
 {

@@ -48,15 +48,22 @@ void solve()
 {
     ll  n, a=0,b=0,m=1, c=0,k=0, i=0, j=0, l=1e9+5;
     string s,p, q;
-    cin>>n>>a;
+    cin>>n;
     vl v(n);
     rep(i,0,n) cin>>v[i];
+    for(i=n%2;i<n;i+=2){
+        if(v[i]>v[i+1]) swap(v[i],v[i+1]);
+    }
+    vl vec=v;
     sort(all(v));
     rep(i,0,n){
-        b+=v[i];
-        k+=a/b;
+        if(v[i]!=vec[i]){
+            k=1;break;
+        }
     }
-    cout<<k<<endl;
+    if(k) cout<<"NO";
+    else cout<<"YES";
+    cout<<endl;
 }
 int main()
 {

@@ -48,15 +48,27 @@ void solve()
 {
     ll  n, a=0,b=0,m=1, c=0,k=0, i=0, j=0, l=1e9+5;
     string s,p, q;
-    cin>>n>>a;
+    cin>>n;
     vl v(n);
     rep(i,0,n) cin>>v[i];
-    sort(all(v));
-    rep(i,0,n){
-        b+=v[i];
-        k+=a/b;
+    rep(i,0,n-1){
+        ll x=min(v[i],v[i+1]);
+        ll y=max(v[i],v[i+1]);
+        if(y>=2*x) l=min(l,(y+1)/2);
+        else l=min(l,(x+y+2)/3);
     }
-    cout<<k<<endl;
+    rep(i,1,n-1){
+        ll x=v[i-1];
+        ll y=v[i+1];
+        c=0;
+        if(x<y) c=x+(y-x+1)/2;
+        else c=y+(x-y+1)/2;
+        l=min(l,c);
+    }
+    sort(all(v));
+    l=min(l,(v[0]+1)/2+(v[1]+1)/2);
+    cout<<l;
+    cout<<endl;
 }
 int main()
 {
@@ -66,7 +78,7 @@ int main()
     ios_base::sync_with_stdio(false);
     cin. tie(0);cout. tie(0);
     ll t=1;
-    cin>>t;
+    // cin>>t;
     while(t--)
     {
         solve();

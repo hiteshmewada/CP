@@ -50,13 +50,28 @@ void solve()
     string s,p, q;
     cin>>n>>a;
     vl v(n);
-    rep(i,0,n) cin>>v[i];
-    sort(all(v));
+    ll sum=0,sq=0;
     rep(i,0,n){
-        b+=v[i];
-        k+=a/b;
+        cin>>v[i];
+        sum+=v[i];
+        sq+=(v[i]*v[i]);
     }
-    cout<<k<<endl;
+    c=0;
+    for(auto x:v) if(x==0) c++;
+    if(c==n){
+        cout<<1<<endl;return;
+    }
+    if(sum==0) cout<<"IMPOSSIBLE";
+    else{
+        if((sq-(sum*sum))%(2*sum)==0){
+            c=(sq-(sum*sum))/(2*sum);
+            if(c>=-1e18 and c<=1e18) cout<<c;
+            else cout<<"IMPOSSIBLE";
+        }
+        
+        else cout<<"IMPOSSIBLE";
+    }
+    cout<<endl;
 }
 int main()
 {
@@ -67,8 +82,9 @@ int main()
     cin. tie(0);cout. tie(0);
     ll t=1;
     cin>>t;
-    while(t--)
+    for(ll i=1;i<=t;i++)
     {
+    cout<<"Case #"<<i<<": ";
         solve();
     }
 //cerr << "time taken : " << (float)clock() / CLOCKS_PER_SEC << " secs" << endl; 

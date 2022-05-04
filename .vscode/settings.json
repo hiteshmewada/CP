@@ -20,7 +20,10 @@
     "*.tcc": "cpp",
     "iomanip": "cpp",
     "chrono": "cpp",
-    "complex": "cpp"
+    "complex": "cpp",
+    "*.ipp": "cpp",
+    "bitset": "cpp",
+    "utility": "cpp"
   },
   "C_Cpp.clang_format_fallbackStyle": {
     "BasedOnStyle": "LLVM",

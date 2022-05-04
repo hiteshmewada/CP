@@ -48,20 +48,48 @@ void solve()
 {
     ll  n, a=0,b=0,m=1, c=0,k=0, i=0, j=0, l=1e9+5;
     string s,p, q;
-    cin>>n>>a;
-    vl v(n);
-    rep(i,0,n) cin>>v[i];
-    sort(all(v));
+    cin>>n;
+    vector<pair<ll,pair<ll,ll>>> v;
     rep(i,0,n){
-        b+=v[i];
-        k+=a/b;
+        cin>>a;
+        v.pb({a,{1,i+1}});
     }
-    cout<<k<<endl;
+    rep(i,0,n){
+        cin>>a;
+        v.pb({a,{2,i+1}});
+    }
+    rep(i,0,n){
+        cin>>a;
+        v.pb({a,{3,i+1}});
+    }
+    cin>>b>>c;
+    sort(all(v));
+    reverse(all(v));
+    vl vis(n,0);
+    // memset(vis,0ll,sizeof(vis));
+    ll ans=0;
+    rep(i,0,3*n){
+        deb(v[i].ff)
+        if(vis[v[i].ss.ss-1]) continue;
+        if(v[i].ss.ff==1 and b){
+            vis[v[i].ss.ss-1]=1;
+            ans+=v[i].ff;b--;
+        }
+        else if(v[i].ss.ff==2 and c){
+            vis[v[i].ss.ss-1]=1;
+            ans+=v[i].ff;c--;
+        }
+        else{
+            vis[v[i].ss.ss-1]=1;
+            ans+=v[i].ff;
+        }
+    }
+    cout<<ans<<endl;
 }
 int main()
 {
 #ifndef ONLINE_JUDGE
-// freopen("Error.txt","w",stderr);
+freopen("Error.txt","w",stderr);
 #endif
     ios_base::sync_with_stdio(false);
     cin. tie(0);cout. tie(0);

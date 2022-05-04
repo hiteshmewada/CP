@@ -49,12 +49,25 @@ void solve()
     ll  n, a=0,b=0,m=1, c=0,k=0, i=0, j=0, l=1e9+5;
     string s,p, q;
     cin>>n>>a;
-    vl v(n);
-    rep(i,0,n) cin>>v[i];
-    sort(all(v));
-    rep(i,0,n){
-        b+=v[i];
-        k+=a/b;
+    map<ll,ll>mp;
+    for(i=2;i*i<=n;i++){
+        while(n%i==0){
+            mp[i]++;
+            n/=i;
+        }
+    }
+    if(n>1) mp[n]++;
+    for(i=2;i*i<=a;i++){
+        while(a%i==0){
+            mp[i]++;
+            a/=i;
+        }
+    }
+    if(a>1) mp[a]++;
+    k=1;
+    for(auto x:mp) {
+
+        k*=(x.ss+1);
     }
     cout<<k<<endl;
 }
@@ -66,7 +79,7 @@ int main()
     ios_base::sync_with_stdio(false);
     cin. tie(0);cout. tie(0);
     ll t=1;
-    cin>>t;
+    // cin>>t;
     while(t--)
     {
         solve();

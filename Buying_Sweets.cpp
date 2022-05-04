@@ -46,16 +46,49 @@ template<class T,class V> void _print(map<T,V>a){cerr<<"{";for(auto x:a){_print(
 template<class T> void _print(set<T>a){cerr<<"[";for(T x:a){_print(x);cerr<<",";}cerr<<"]";}
 void solve()
 {
-    ll  n, a=0,b=0,m=1, c=0,k=0, i=0, j=0, l=1e9+5;
+    ll  n,b, a=0,m=1, c=0,k=0, i=0, j=0, l=1e9+5;
     string s,p, q;
     cin>>n>>a;
-    vl v(n);
-    rep(i,0,n) cin>>v[i];
-    sort(all(v));
+    vl cost(n),cb(n);
+    rep(i,0,n) cin>>cost[i];
+    rep(i,0,n) cin>>cb[i];
+    vector<pair<ll,ll>>v;
     rep(i,0,n){
-        b+=v[i];
-        k+=a/b;
+        v.pb({cost[i]-cb[i],cost[i]});
     }
+    sort(all(v),[&](const pair<ll,ll>&aa,const pair<ll,ll>&bb){
+        if(aa.ff==bb.ff) return aa.ss<bb.ss;
+        else return aa.ff<bb.ff;
+    });
+    vl vec;
+    for(auto x:v) vec.pb(x.ff);
+    for(auto x:v){
+        if(a<0) break;
+        if(x.ss<=a){
+            j=((a-x.ss)/x.ff+1);
+            a-=(j*x.ff);
+            k+=j;
+        }
+    }
+    // deb(vec)
+    // while(a>0){
+        
+    //     b=lower_bound(all(vec),a)-vec.begin();
+    //     deb(b)
+    //     if(b==n){
+    //         c=b-1;
+    //     }
+    //     else{
+    //         if(b+1<n and v[b+1].ff<=a) c=b+1;
+    //         else c=b;
+    //     }
+    //     deb(c)
+    //     // a=0;
+    //     j=(a-v[c].ff+1);
+    //     a-=(j*v[c].ss);
+    //     k+=j;
+    //     deb2(k,a)
+    // }
     cout<<k<<endl;
 }
 int main()

@@ -48,15 +48,27 @@ void solve()
 {
     ll  n, a=0,b=0,m=1, c=0,k=0, i=0, j=0, l=1e9+5;
     string s,p, q;
-    cin>>n>>a;
-    vl v(n);
-    rep(i,0,n) cin>>v[i];
-    sort(all(v));
-    rep(i,0,n){
-        b+=v[i];
-        k+=a/b;
+    cin>>s;
+    set<char>st;
+    rep(i,0,s.size()) st.insert(s[i]);
+    if(st.size()==1){
+        cout<<"YES"<<endl;return;
     }
-    cout<<k<<endl;
+    a=st.size();
+    n=s.size();
+    rep(i,0,n-a+1){
+        set<char>st2;
+        ll mn=min(i+a,n);
+        rep(j,i,mn){
+            st2.insert(s[j]);
+        }
+        if(st2.size()!=a){
+            k=1;break;
+        }
+    }
+    if(k) cout<<"NO";
+    else cout<<"YES";
+    cout<<endl;
 }
 int main()
 {
